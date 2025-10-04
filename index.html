@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pricing Optimization Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">Dynamic Pricing Optimization Platform</h1>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="overview">Overview</button>
+                <button class="nav-tab" data-tab="analytics">Analytics</button>
+                <button class="nav-tab" data-tab="optimizer">Price Optimizer</button>
+                <button class="nav-tab" data-tab="strategy">Strategy Comparison</button>
+                <button class="nav-tab" data-tab="sensitivity">Sensitivity Analysis</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Overview Tab -->
+            <section id="overview" class="tab-content active">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3>Total Products</h3>
+                        <div class="metric-value">10,500</div>
+                        <div class="metric-subtitle">Products Analyzed</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Revenue Uplift Potential</h3>
+                        <div class="metric-value">15-25%</div>
+                        <div class="metric-subtitle">Expected Improvement</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Profit Improvement</h3>
+                        <div class="metric-value">18-30%</div>
+                        <div class="metric-subtitle">Optimization Impact</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Current Revenue</h3>
+                        <div class="metric-value">$540K</div>
+                        <div class="metric-subtitle">Total Revenue</div>
+                    </div>
+                </div>
+
+                <div class="insights-section">
+                    <div class="card">
+                        <div class="card__header">
+                            <h2>Business Impact Summary</h2>
+                        </div>
+                        <div class="card__body">
+                            <div class="insights-grid">
+                                <div class="insight-item">
+                                    <h4>Coverage</h4>
+                                    <p>5 product categories across 4 store types analyzed for comprehensive pricing optimization</p>
+                                </div>
+                                <div class="insight-item">
+                                    <h4>AI-Powered Strategy</h4>
+                                    <p>Reinforcement Learning agent shows 3.5% revenue improvement over fixed pricing strategies</p>
+                                </div>
+                                <div class="insight-item">
+                                    <h4>Market Responsiveness</h4>
+                                    <p>Dynamic pricing adapts to competitor moves, inventory levels, and seasonal demand patterns</p>
+                                </div>
+                                <div class="insight-item">
+                                    <h4>Key Recommendation</h4>
+                                    <p>Implement RL-based dynamic pricing to maximize both revenue and profit margins</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Tab -->
+            <section id="analytics" class="tab-content">
+                <div class="analytics-grid">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Model Performance Comparison</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="modelPerformanceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Feature Importance Analysis</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="featureImportanceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Price Elasticity by Category</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="elasticityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Price Optimizer Tab -->
+            <section id="optimizer" class="tab-content">
+                <div class="optimizer-grid">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Price Optimization Engine</h3>
+                        </div>
+                        <div class="card__body">
+                            <form id="optimizerForm" class="optimizer-form">
+                                <div class="form-group">
+                                    <label for="category" class="form-label">Product Category</label>
+                                    <select id="category" class="form-control" required>
+                                        <option value="">Select Category</option>
+                                        <option value="Electronics">Electronics</option>
+                                        <option value="Clothing">Clothing</option>
+                                        <option value="Home & Garden">Home & Garden</option>
+                                        <option value="Sports">Sports</option>
+                                        <option value="Books">Books</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="currentPrice" class="form-label">Current Price ($)</label>
+                                        <input type="number" id="currentPrice" class="form-control" min="1" max="500" step="0.01" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="competitorPrice" class="form-label">Competitor Price ($)</label>
+                                        <input type="number" id="competitorPrice" class="form-control" min="1" max="500" step="0.01" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inventoryLevel" class="form-label">Inventory Level: <span id="inventoryValue">50</span></label>
+                                    <input type="range" id="inventoryLevel" class="slider" min="1" max="100" value="50">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="seasonalFactor" class="form-label">Seasonal Factor: <span id="seasonalValue">1.0</span></label>
+                                    <input type="range" id="seasonalFactor" class="slider" min="0.5" max="2.0" step="0.1" value="1.0">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="marketingSpend" class="form-label">Marketing Spend ($)</label>
+                                    <input type="number" id="marketingSpend" class="form-control" min="0" max="10000" step="1" value="1000">
+                                </div>
+
+                                <button type="submit" class="btn btn--primary">Optimize Price</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Optimization Results</h3>
+                        </div>
+                        <div class="card__body">
+                            <div id="optimizationResults" class="results-grid">
+                                <div class="result-item">
+                                    <h4>Recommended Price</h4>
+                                    <div class="result-value" id="recommendedPrice">-</div>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Predicted Demand</h4>
+                                    <div class="result-value" id="predictedDemand">-</div>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Expected Revenue</h4>
+                                    <div class="result-value" id="expectedRevenue">-</div>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Expected Profit</h4>
+                                    <div class="result-value" id="expectedProfit">-</div>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Price Change</h4>
+                                    <div class="result-value" id="priceChange">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Strategy Comparison Tab -->
+            <section id="strategy" class="tab-content">
+                <div class="strategy-grid">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Strategy Performance Comparison</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="strategyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>RL Training Progress</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="rlTrainingChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card strategy-metrics">
+                        <div class="card__header">
+                            <h3>Strategy Effectiveness</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="strategy-comparison">
+                                <div class="strategy-item best">
+                                    <h4>🎯 RL Agent (Recommended)</h4>
+                                    <div class="strategy-stats">
+                                        <span>Revenue: $456K</span>
+                                        <span>Profit: $183K</span>
+                                        <span>Avg Price: $60.56</span>
+                                    </div>
+                                </div>
+                                <div class="strategy-item">
+                                    <h4>📊 Fixed Pricing</h4>
+                                    <div class="strategy-stats">
+                                        <span>Revenue: $441K</span>
+                                        <span>Profit: $176K</span>
+                                        <span>Avg Price: $100.00</span>
+                                    </div>
+                                </div>
+                                <div class="strategy-item">
+                                    <h4>🏪 Competitive Pricing</h4>
+                                    <div class="strategy-stats">
+                                        <span>Revenue: $397K</span>
+                                        <span>Profit: $159K</span>
+                                        <span>Avg Price: $198.06</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sensitivity Analysis Tab -->
+            <section id="sensitivity" class="tab-content">
+                <div class="sensitivity-grid">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Interactive Sensitivity Analysis</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="sensitivity-controls">
+                                <div class="form-group">
+                                    <label for="priceRange" class="form-label">Price Range: $<span id="priceRangeMin">50</span> - $<span id="priceRangeMax">200</span></label>
+                                    <div class="range-slider">
+                                        <input type="range" id="priceRangeMin" class="slider" min="50" max="200" value="50">
+                                        <input type="range" id="priceRangeMax" class="slider" min="50" max="200" value="200">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Competitor Price Multiplier</label>
+                                    <div class="multiplier-options">
+                                        <label><input type="radio" name="multiplier" value="0.8" checked> 80%</label>
+                                        <label><input type="radio" name="multiplier" value="0.9"> 90%</label>
+                                        <label><input type="radio" name="multiplier" value="1.0"> 100%</label>
+                                        <label><input type="radio" name="multiplier" value="1.1"> 110%</label>
+                                        <label><input type="radio" name="multiplier" value="1.2"> 120%</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Profit Sensitivity Curve</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="chart-container" style="position: relative; height: 350px;">
+                                <canvas id="sensitivityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Market Scenario Analysis</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="scenario-analysis">
+                                <div class="scenario-item">
+                                    <h4>Optimal Price Point</h4>
+                                    <div class="scenario-value" id="optimalPrice">$85</div>
+                                </div>
+                                <div class="scenario-item">
+                                    <h4>Max Profit Potential</h4>
+                                    <div class="scenario-value" id="maxProfit">$12,500</div>
+                                </div>
+                                <div class="scenario-item">
+                                    <h4>Price Elasticity</h4>
+                                    <div class="scenario-value" id="priceElasticity">-1.2</div>
+                                </div>
+                                <div class="scenario-item">
+                                    <h4>Market Position</h4>
+                                    <div class="scenario-value" id="marketPosition">Competitive</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        Made By Ansh Kambli | 2025
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
